@@ -1,54 +1,39 @@
-import java.util.ArrayList;
 import java.util.EmptyStackException;
-import java.util.Iterator;
 
 /**
- * Implementación de una pila basada en listas.
+ * Prueba de las operaciones de una pila
  * @author Emmanuel Cruz Hernández.
  * @version 1.0 Septiembre 2022.
  * @since Estructuras de datos 2023-1.
  */
-public class Stack<T> implements TDAStack<T> {
-
-  /* Lista de apoyo para las operaciones */
-  private ArrayList<T> lista = new ArrayList<>();
+public class TestStack {
   
-  @Override
-  public void push(T e){
-    lista.add(0, e);
-  }
+  public static void main(String[] args) {
+    TDAStack<String> stack = new Stack<>();
 
-  @Override
-  public T pop() throws EmptyStackException {
-    // Verificar si es vacía
-    if(lista.isEmpty())
-      throw new EmptyStackException();
-    return lista.remove(0);
-  }
-  
-  @Override
-  public T top() throws EmptyStackException {
-    // Verificar si es vacía
-    if(lista.isEmpty())
-      throw new EmptyStackException();
-    return lista.get(0);
-  }
-
- @Override
-  public boolean isEmpty() {
-    return lista.isEmpty();
-  }
-  
-  @Override
-  public void clear(){
-    lista.clear();
-  }
-
-  @Override
-  public void show(){
-    Iterator<T> iterator = lista.iterator();
-    while(iterator.hasNext()){
-      System.out.println(iterator.next());
+    try {
+      System.out.println("El tope es "+stack.top());
+    } catch (EmptyStackException e) {
+      System.out.println("La pila esta vacia");
     }
+
+    stack.push("Buho");
+    stack.push("Pinguino");
+    stack.push("Gato");
+    stack.push("Oso");
+    stack.push("Gallo");
+
+    stack.show();
+
+    System.out.println("El tope es "+stack.top());
+
+    stack.pop();
+
+    stack.show();
+
+    stack.clear();
+
+    System.err.println("La pila es vacia: "+stack.isEmpty());
+
   }
 }
