@@ -114,25 +114,25 @@ public class NReinas {
     /**
      * Método auxiliar que verifica que en una solucion dada las reinas no se esten atacando
      * @param solution Arreglo de enteros de n tamaño que representa en que columna y fila se coloca cada una de las n reinas
-     * @param phase Un entero que representa cual fue la ultima columna en la que se introdujo una reina
+     * @param column Un entero que representa cual fue la ultima columna en la que se introdujo una reina
      * @return Devuelve un boolean true si la solucion es válida o false de lo contrario
      * @throws IllegalStateException En caso de recibir una fase mayor al tamaño del arreglo pues sería incoherente
      */
-    private static boolean validBoard(int[] solution, int phase){
-        if(phase > solution.length)
+    private static boolean validBoard(int[] solution, int column){
+        if(column > solution.length)
             throw new IllegalStateException();
             
         // Revisamos que no haya reinas en la misma fila
-        for(int i=0;i < phase;i++){
-            for(int j=i+1;j <= phase;j++){
+        for(int i=0;i < column;i++){
+            for(int j=i+1;j <= column;j++){
                 if(solution[i] == solution[j])
                     return false;
             }
         }
 
         //Revisamos que no haya reinas en la misma diagonal
-        for(int i=0;i < phase;i++){
-            for(int j=i+1;j <= phase;j++){
+        for(int i=0;i < column;i++){
+            for(int j=i+1;j <= column;j++){
                 if(Math.abs(i-j) == Math.abs(solution[i] - solution[j])){
                     return false;
                 }
@@ -145,20 +145,20 @@ public class NReinas {
     /**
      * Método auxiliar que implementa una solucion recursiva al problema de las reinas
      * @param solution Arreglo de enteros de n tamaño que representa en que columna y fila se introduce cada una de las n reinas sobre el cual estaremos trabajando
-     * @param phase Entero que representa en que columna estamos introduciendo una reina
+     * @param column Entero que representa en que columna estamos introduciendo una reina
      * @param queenNumber El numero de reinas que debe tener el tablero al final de la solución
      * @return Devuelve un booleano true cuando se ha llegado a una solución y es válida o false si no se encontro una
      */
-    private static boolean recursiveSolution(int[] solution, int phase, int queenNumber){
-        if(phase > queenNumber-1)
+    private static boolean recursiveSolution(int[] solution, int column, int queenNumber){
+        if(column > queenNumber-1)
             return false;
         boolean resolved = false;
-        solution[phase] = -1;
-        while(solution[phase] < queenNumber-1 && !resolved){
-            solution[phase]++;
-            if(validBoard(solution,phase)){
-                if(phase != queenNumber-1){
-                    resolved = recursiveSolution(solution, phase+1, queenNumber);
+        solution[column] = -1;
+        while(solution[column] < queenNumber-1 && !resolved){
+            solution[column]++;
+            if(validBoard(solution,column)){
+                if(column != queenNumber-1){
+                    resolved = recursiveSolution(solution, column+1, queenNumber);
                 }
                 else{
                     resolved = true;
