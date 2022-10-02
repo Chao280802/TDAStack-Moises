@@ -11,11 +11,6 @@ import java.util.Scanner;
 public class BalanceHTML {
 
     /**
-     * Pila auxiliar donde se almacenan las etiquetas html
-     */
-    private static Stack<Object> linkedStack = new Stack<>();
-
-    /**
      * Método principal donde se pide el texto html y se devuelve el resultado del balance
      */
     public static void main(String[] args){
@@ -41,6 +36,7 @@ public class BalanceHTML {
      * @return Devuelve un booleano true de estar balanceado o false de no estarlo o de recibir un texto sin etiquetas
      */
     private static boolean isHTMLMatched(String s){
+        Stack<Object> linkedStack = new Stack<>();
         boolean balance = false;
         char[] chars = s.toCharArray();
 
